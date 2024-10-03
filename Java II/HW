@@ -1,0 +1,44 @@
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+
+const snowMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+const capMaterial = new THREE.MeshBasicMaterial({ color: 0xFF0000 });
+const carrotMaterial = new THREE.MeshBasicMaterial({ color: 0xffa500 });
+
+const bottomGeometry = new THREE.SphereGeometry(1, 32, 32);
+const bottom = new THREE.Mesh(bottomGeometry, snowMaterial);
+scene.add(bottom);
+
+const middleGeometry = new THREE.SphereGeometry(0.75, 32, 32);
+const middle = new THREE.Mesh(middleGeometry, snowMaterial);
+middle.position.y = 1.5;
+scene.add(middle);
+
+const headGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+const head = new THREE.Mesh(headGeometry, snowMaterial);
+head.position.y = 2.7;
+scene.add(head);
+
+const capGeometry = new THREE.BoxGeometry(0.8, 0.4, 0.8);
+const cap = new THREE.Mesh(capGeometry, capMaterial);
+cap.position.y = 3.2;
+scene.add(cap);
+
+
+
+const sizes = {
+    width: 800,
+    height: 600
+};
+
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+camera.position.z = 6;
+scene.add(camera);
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(sizes.width, sizes.height);
+document.getElementById('scene').appendChild(renderer.domElement);
+
+renderer.render(scene, camera);
+
